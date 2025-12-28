@@ -7,7 +7,7 @@ use image::{DynamicImage, GenericImageView, ImageBuffer, Luma, RgbImage, Rgba, R
 use ndarray::{Array4, Axis};
 
 pub fn rembg(
-    manager: &ModelManager,
+    manager: &mut ModelManager,
     image: DynamicImage,
     options: &RemovalOptions,
 ) -> Result<RemovalResult, RembgError> {

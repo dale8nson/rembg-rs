@@ -1,6 +1,6 @@
 use crate::error::RembgError;
 use image::DynamicImage;
-use oxipng::{Options, StripChunks, optimize_from_memory, Interlacing, Deflaters};
+use oxipng::{Options, StripChunks, optimize_from_memory};
 
 pub fn compress_png(image: &DynamicImage) -> Result<Vec<u8>, RembgError> {
     // 1) RGBA8
@@ -54,8 +54,6 @@ pub fn compress_png(image: &DynamicImage) -> Result<Vec<u8>, RembgError> {
     let mut opt = Options::from_preset(4);
     opt.strip = StripChunks::Safe;
     opt.optimize_alpha = true;
-    opt.interlace = Some(Interlacing::None);
-    opt.deflate = Deflaters::Libdeflater { compression: 12 };
     let optimized = optimize_from_memory(&pal_png, &opt)?;
 
     Ok(optimized)

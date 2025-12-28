@@ -17,7 +17,7 @@ fn main() {
     println!("Model: {}", args.model);
     println!();
 
-    let manager = match ModelManager::from_file(Path::new(&args.model)) {
+    let mut manager = match ModelManager::from_file(Path::new(&args.model)) {
         Ok(m) => m,
         Err(e) => {
             eprintln!("❌ Failed to manager: {}", e);
@@ -48,7 +48,7 @@ fn main() {
     println!("🖼️  Processing image...");
 
     // Process the image
-    let result = match rembg(&manager, img, &options) {
+    let result = match rembg(&mut manager, img, &options) {
         Ok(result) => result,
         Err(e) => {
             eprintln!("❌ Error: {}", e);

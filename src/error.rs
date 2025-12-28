@@ -9,7 +9,7 @@ pub enum RembgError {
     ImageError(image::ImageError),
 
     /// ONNX Runtime error
-    OnnxError(ort::OrtError),
+    OnnxError(ort::Error),
 
     /// ONNX Runtime library not available
     OnnxRuntimeNotAvailable(String),
@@ -65,8 +65,8 @@ impl From<image::ImageError> for RembgError {
     }
 }
 
-impl From<ort::OrtError> for RembgError {
-    fn from(err: ort::OrtError) -> Self {
+impl From<ort::Error> for RembgError {
+    fn from(err: ort::Error) -> Self {
         RembgError::OnnxError(err)
     }
 }
