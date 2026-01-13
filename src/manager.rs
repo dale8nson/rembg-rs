@@ -39,8 +39,8 @@ impl ModelManager {
         let input_tensor = Value::from_array((shape.as_slice(), data))?;
 
         // Get input/output names before running inference (to avoid borrow issues)
-        let input_name = self.session.inputs[0].name.clone();
-        let output_name = self.session.outputs[0].name.clone();
+        let input_name = {String::from(self.session.inputs()[0].name())};
+        let output_name = {String::from(self.session.outputs()[0].name())};
 
         // Run inference
         let outputs = self.session.run(ort::inputs![input_name.as_str() => input_tensor])?;
